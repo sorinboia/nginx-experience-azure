@@ -1,40 +1,26 @@
-variable "user_id" {
-  default = "sorin"
+variable "client_id" {}
+variable "client_secret" {}
+
+variable "agent_count" {
+  default = 3
 }
 
-variable "aws_region" {
-  default = "eu-central-1"
+variable "ssh_public_key" {
+  default = "public.key"
 }
 
-variable "aws_az" {
-  default = "eu-central-1a"
+variable "dns_prefix" {
+  default = "k8stest"
 }
 
-variable "aws_az1" {
-  default = "eu-central-1b"
+variable cluster_name {
+  default = "k8stest"
 }
 
-variable "management_subnet_cidr" {
-  description = "CIDR for the Management subnet"
-  default     = "10.0.1.0/24"
+variable resource_group_name {
+  default = "azure-k8stest"
 }
 
-variable "public_subnet_cidr" {
-  description = "CIDR for the public subnet"
-  default     = "10.0.2.0/24"
-}
-
-variable "private_subnet_cidr" {
-  description = "CIDR for the private subnet"
-  default     = "10.0.3.0/24"
-}
-
-variable "cluster-name" {
-  default = "terraform-eks-demo"
-  type    = string
-}
-
-variable "key_name" {
-  default = "ee-default-keypair"
-  type    = string
+variable location {
+  default = "UK South"
 }

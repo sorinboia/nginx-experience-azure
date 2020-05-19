@@ -35,7 +35,7 @@ Wair for Terraform is to finish and verify the deployment is working as expected
 4. We need to save the remote access config for the Kubernetes cluster locally:  
 <pre>
 mkdir ~/.kube/ 
-terraform output > ~/.kube/config
+terraform output kube_config > ~/.kube/config
 </pre>
 
 5. Check and see that our cluster is up an running.  
@@ -45,9 +45,10 @@ Command:
 kubectl get nodes
 
 Output:   
-NAME                                          STATUS   ROLES    AGE   VERSION  
-ip-10-0-2-32.eu-central-1.compute.internal    Ready     none    84s   v1.15.10-eks-bac369  
-ip-10-0-3-217.eu-central-1.compute.internal   Ready     none    88s   v1.15.10-eks-bac369  
+NAME                                STATUS   ROLES   AGE     VERSION
+aks-agentpool-21324540-vmss000000   Ready    agent   5m19s   v1.15.10
+aks-agentpool-21324540-vmss000001   Ready    agent   5m10s   v1.15.10
+aks-agentpool-21324540-vmss000002   Ready    agent   5m5s    v1.15.10
 </pre>
 
 And the `kube-system` pods (this is the namespace for objects created by the Kubernetes system):  
@@ -57,12 +58,15 @@ kubectl get pods -n kube-system
 
 Output:
 NAME                       READY   STATUS    RESTARTS   AGE  
-aws-node-9hrrm             1/1     Running   0          14m  
-aws-node-gmfkm             1/1     Running   0          14m  
-coredns-5b6dbb4b59-5r9kb   1/1     Running   0          17m  
-coredns-5b6dbb4b59-k5z6k   1/1     Running   0          17m  
-kube-proxy-7lv9h           1/1     Running   0          14m  
-kube-proxy-wmmxw           1/1     Running   0          14m  
+NAME                                  READY   STATUS    RESTARTS   AGE
+coredns-698c77c5d7-kprwb              1/1     Running   0          5m5s
+coredns-698c77c5d7-pwfdn              1/1     Running   0          8m17s
+coredns-autoscaler-5bd7c6759b-msb6f   1/1     Running   0          8m14s
+kube-proxy-72ws2                      1/1     Running   0          5m19s
+kube-proxy-rpxxg                      1/1     Running   0          5m28s
+kube-proxy-srl45                      1/1     Running   0          5m14s
+metrics-server-7d654ddc8b-t889n       1/1     Running   0          8m17s
+tunnelfront-698dbdbb5-k5rfx           1/1     Running   0          8m16s  
 </pre>
 
 At the moment we have our setup deployed as it can be seen in the bellow diagram.
