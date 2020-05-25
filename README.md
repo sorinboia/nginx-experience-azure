@@ -7,7 +7,7 @@ From code development to customer consumption, NGINX deployed on Azure is helpin
 
 #### [Intro to the workshop](guide/2intro.md) 
  
-In this workshop you will experience how to deploy your application in an agile way, using NGINX Controller utilizing AWS compute, applying all the application services needed, such as load balancing, API management and application firewall in a fully automated way.  
+In this workshop you will experience how to deploy your application in an agile way, using NGINX Controller utilizing Azure compute, applying all the application services needed, such as load balancing, API management and application firewall in a fully automated way.  
  
 #### [Deploy NGINX infrastructure using Terraform](guide/3tf.md)
 
