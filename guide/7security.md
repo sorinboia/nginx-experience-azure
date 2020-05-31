@@ -103,7 +103,7 @@ The WAF policy is json based and from the example bellow, you can observe how al
 
 <pre>
 Command:
-kubectl apply -f files/7waf/elk.yaml
+cat files/7waf/elk.yaml | sed "s/{{randomnumber}}/$randomnumber/g" | kubectl apply -f -
 </pre>
 
 3. In order to connect to our ELK pod, we will need to find the public address of this service:  
@@ -117,7 +117,7 @@ NAME      TYPE           CLUSTER-IP      EXTERNAL-IP                            
 elk-web   LoadBalancer   172.20.179.34   a28bd2d8c94214ae0b512274daa06211-2103709514.eu-central-1.elb.amazonaws.com   5601:32471/TCP,9200:32589/TCP,5044:31876/TCP   16h
 </pre>
 
-4. Verify that ELK is up and running by browsing to: `http://[ELK-EXTERNAL-IP]:5601/`.  
+4. Verify that ELK is up and running by browsing to: `http://elk-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com:5601/`.  
 
 :warning: Please note that it might take some time for the DNS name to become available.
 
@@ -136,7 +136,7 @@ All of our services are protected and monitored.
 
 7. Let's simulate a Cross Site Scripting (XSS) attack, and make sure it's blocked:  
 
-`https://<INGRESS-EXTERNAL-IP>/trading/index.php?a=%3Cscript%3Ealert(%27xss%27)%3C/script%3E`
+`https://arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com/trading/index.php?a=%3Cscript%3Ealert(%27xss%27)%3C/script%3E`
 
 Each of the blocked requests will generate a support ID, save it for later.  
 
