@@ -88,7 +88,7 @@ metadata:
   name: arcadia  
 spec:
   rules:
-  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
+  - host: arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
@@ -176,10 +176,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
+    - arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
+  - host: arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
@@ -256,10 +256,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
+    - arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
+  - host: arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
