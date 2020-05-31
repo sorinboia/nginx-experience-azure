@@ -57,16 +57,16 @@ Command:
 kubectl get svc --namespace=nginx-ingress
 
 Output:
-NAME                      TYPE           CLUSTER-IP      EXTERNAL-IP                                                                 PORT(S)                      AGE
-dashboard-nginx-ingress   LoadBalancer   172.20.36.60    aeb592ad4011544219c0bc49581baa13-421891138.eu-central-1.elb.amazonaws.com   80:32044/TCP                 11m
-nginx-ingress             LoadBalancer   172.20.14.206   ab21b88fec1f445d98c79398abc2cd5d-961716132.eu-central-1.elb.amazonaws.com   80:30284/TCP,443:31110/TCP   5h35m
+NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
+dashboard-nginx-ingress   LoadBalancer   10.0.147.48    52.151.75.25    80:31678/TCP                 44m
+nginx-ingress             LoadBalancer   10.0.144.182   51.11.145.113   80:31522/TCP,443:30718/TCP   114m
 </pre>
 
-Note the EXTERNAL-IP of the "dashboard-nginx-ingress". This is the hostname that we are going to use in order to view the Nginx Dashboard.  
-Browse to the following location and verify you can see the dashboard: `http://<DASHBOARD-EXTERNAL-IP>/dashboard.html`
+Note you will need to replace in the hostname the value of the random generated number  
+Browse to the following location and verify you can see the Nginx dashboard: `http://dashboard-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com/dashboard.html`
 
-Note the EXTERNAL-IP of the "nginx-ingress". This is the hostname that we are going to use in order to publish the Arcadia web application.  
-Browse to the following location and verify that you receive a 404 status code: `http://<INGRESS-EXTERNAL-IP>/`  
+Browse to the following location and verify that you receive a 404 status code: `http://arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com/`
+This is the hostname that we are going to use in order to publish the Arcadia web application.  
 
 :warning: Please note that it might take some time for the DNS names to become available.
 
@@ -79,7 +79,7 @@ We will start with a basic configuration.
   
 :warning: Please use the following folder: `files/5ingress/` for all future K8s config files in this guide.  
 
-:warning: Please note: you need to replace the `host` value with the EXTERNAL-IP of the `nginx-ingress` service.
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 
 <pre>
 apiVersion: extensions/v1beta1
@@ -88,7 +88,7 @@ metadata:
   name: arcadia  
 spec:
   rules:
-  - host: MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
@@ -120,7 +120,7 @@ kubectl apply -f files/5ingress/arcadia-vs.yaml
 
 At this stage the basic install is finished and all that's left is to check the connectivity to the Arcadia web application. Get the public hostname of the exposed `nginx-ingress` service.  
 
-6. Browse to the following location and verify that you can access the site: `http://<INGRESS-EXTERNAL-IP>/`  
+6. Browse to the following location and verify that you can access the site: `https://arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com/`  
 
 7. Login to the application using the following credentials:
 
@@ -151,7 +151,7 @@ In our next step we will finish this part of the configuration, we will implemen
 - Enable https for the application and redirect http requests to https
 
 11. Create `ingress-arcadia.yaml` to reflect the bellow and apply the configuration.  
-:warning: Please note: you need to replace the `host` value with the EXTERNAL-IP of the `nginx-ingress` service.  
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value. 
 
 <pre>
 apiVersion: v1
@@ -176,10 +176,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+    - arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
@@ -218,9 +218,6 @@ metadata:
   name: nginx-config
   namespace: nginx-ingress
 data:
-  proxy-protocol: "True"
-  real-ip-header: "proxy_protocol"
-  set-real-ip-from: "0.0.0.0/0"
   http-snippets  : |
     proxy_cache_path /var/tmp/a levels=1:2 keys_zone=my_cache:10m max_size=100m inactive=60m use_temp_path=off;
 </pre>
@@ -238,7 +235,7 @@ kubectl apply -f files/5ingress/nginx-config.yaml
 Configure the Nginx Ingress to start using it and start caching.  
 
 14. Create a new file `nginx-ingress-update.yaml` with the configuration below and apply it.  
-:warning: Please note: you need to replace the `host` value with the EXTERNAL-IP of the `nginx-ingress` service.  
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 
 
 <pre>
@@ -259,10 +256,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+    - arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+  - host: arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /

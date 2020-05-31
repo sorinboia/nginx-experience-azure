@@ -81,6 +81,13 @@ cd ..
 7. Generate a random number which will be used later in our deployments
 > export randomnumber=$(openssl rand -hex 4)
 
+8. Check the random number which has been created and save it for later
+<pre>
+Command:
+echo $randomnumber
+Output:
+adf10a30
+</pre>
 
 
 Next we will move on to deploying the application.
