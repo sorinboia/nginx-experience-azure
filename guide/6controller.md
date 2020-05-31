@@ -39,6 +39,7 @@ Once you login - the first thing you will see is the API key, save it for later.
 5. Deploy the microgateway with the following configuration.  
 
 :warning: Please note: you need to replace the IP address of the controller and the API key value you saved in the previous step.
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 Create a new file `microgw.yaml`:
 
 <pre>
@@ -84,6 +85,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: microgateway
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: micro-[RANDOM GENERATED NUMBER]    
 spec:
   selector:
     app: microgateway
@@ -105,17 +108,7 @@ The end goal will be to expose and protect our APIs both internally within the c
 
 You will see the microgateway we just deployed listed. If it is not there wait for about 2 minutes, it might take a little bit of time for the instance to register.
 
-7. Get the EXTERNAL-IP of the microgateway service we just published, we will use it later within our config.  
-
-<pre>
-Command:
-kubectl get svc microgateway
-
-Output:
-NAME           TYPE           CLUSTER-IP     EXTERNAL-IP                                                                 PORT(S)                      AGE
-microgateway   LoadBalancer   172.20.181.0   ae0aa9bf7704745fbb2a47da2c3a2039-258004477.eu-central-1.elb.amazonaws.com   80:31424/TCP,443:32040/TCP   21h
-</pre>
-
+7. The hostname of the microgateway service we just published, will have the following format `arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com` .  
 
 8. Build the configuration:
 ##### "N" -> "Services" -> "Environments" -> "Create Environment"  
@@ -154,10 +147,10 @@ Click "Submit".
 10. Create the Gateway:  
 
 ##### "N" -> "Services" -> "Gateways" -> "Create Gateway"
-> Name: api.arcadia.aws.cloud  
+> Name: api.arcadia.azure.cloud  
 > Environment: prod  
 > Instance Refs: Select All  
-> Hostname: https://<EXTERNAL-IP OF THE "microgateway" SERVICE>  
+> Hostname: https://arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
 > Cert Reference: server-cert  
 > Submit
 
