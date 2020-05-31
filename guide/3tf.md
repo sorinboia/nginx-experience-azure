@@ -21,16 +21,11 @@ terraform apply --auto-approve
 </pre>
 
 
-It will take around 10 minutes for Terraform and AWS to finish the initial deployment.
-While you wait, you can review the [Introduction section of the AWS EKS Workshop](https://eksworkshop.com/010_introduction/) to learn about Kubernetes and Amazon EKS basics.  
+It will take around 10 minutes for Terraform and Azure to finish the initial deployment.
+While you wait, you can review the [Core concepts for Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/concepts-clusters-workloads) to learn about Kubernetes and Azure AKS basics.  
 
-### Managed control plane
-Amazon EKS provides a scalable and highly-available control plane that runs across multiple AWS availability zones. The Amazon EKS service automatically manages the availability and scalability of the Kubernetes API servers and the etcd persistence layer for each cluster. Amazon EKS runs the Kubernetes control plane across three Availability Zones in order to ensure high availability, and it automatically detects and replaces unhealthy masters.
 
-### Managed worker nodes
-Amazon EKS lets you create, update, or terminate worker nodes for your cluster with a single command. Managed node groups run nodes using the latest EKS-optimized AMIs in your AWS account while updates and terminations gracefully drain nodes to ensure your applications stay available.
-
-Wair for Terraform is to finish and verify the deployment is working as expected and we are able to control the Kubernetes environment.
+Wait for Terraform is to finish and verify the deployment is working as expected and we are able to control the Kubernetes environment.
 
 4. We need to save the remote access config for the Kubernetes cluster locally:  
 <pre>
@@ -57,7 +52,6 @@ Command:
 kubectl get pods -n kube-system
 
 Output:
-NAME                       READY   STATUS    RESTARTS   AGE  
 NAME                                  READY   STATUS    RESTARTS   AGE
 coredns-698c77c5d7-kprwb              1/1     Running   0          5m5s
 coredns-698c77c5d7-pwfdn              1/1     Running   0          8m17s

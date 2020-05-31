@@ -1,18 +1,13 @@
-resource "azurerm_resource_group" "k8s" {
-  name     = var.resource_group_name
-  location = var.location
-}
-
-resource "random_id" "random-string" {
-  byte_length = 8
-}
-
-
 resource "azurerm_kubernetes_cluster" "k8s" {
-  name                = var.cluster_name
+  name                = "${var.cluster_name}-${random_id.random-string.dec}"
   location            = var.location
-  resource_group_name = azurerm_resource_group.az_resourcegroup.name
-  dns_prefix          = var.dns_prefix
+  resource_group_name = "${azurerm_resource_group.az_resourcegroup.name}-${random_id.random-string.dec}"
+  dns_prefix          = "${var.dns_prefix}-${random_id.random-string.dec}"
+
+  network_profile {
+    network_plugin = "azure"
+    load_balancer_sku = "Basic"
+  }
 
   linux_profile {
     admin_username = "ubuntu"

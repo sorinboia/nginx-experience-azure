@@ -3,10 +3,10 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "az_resourcegroup" {
-  name     = "az_resourcegroup"
+  name     = "${var.resource_group_name}-${random_id.random-string.dec}"
   location = var.location
 
   tags = {
-    environment = "Terraform Demo"
+    environment = "Nginx AKS demo"
   }
 }

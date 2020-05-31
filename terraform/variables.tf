@@ -10,17 +10,22 @@ variable "ssh_public_key" {
 }
 
 variable "dns_prefix" {
-  default = "k8stest"
+  default = "k8s"
 }
 
 variable cluster_name {
-  default = "k8stest"
+  default = "k8s"
 }
 
 variable resource_group_name {
-  default = "azure-k8stest"
+  default = "azure-k8s"
 }
 
 variable location {
   default = "UK South"
 }
+
+resource "random_id" "random-string" {
+  byte_length = 4
+}
+

@@ -1,15 +1,15 @@
 resource "azurerm_public_ip" "controller_pip" {
   name = "controller_pip"
   location = var.location
-  resource_group_name = azurerm_resource_group.az_resourcegroup.name
+  resource_group_name = "${azurerm_resource_group.az_resourcegroup.name}-${random_id.random-string.dec}"
   allocation_method = "Dynamic"
   sku = "Basic"
 }
 
 resource "azurerm_network_interface" "controller_vm1nic" {
-  name = "controller-vm1-nic"
+  name = "controller-vm1-nic-${random_id.random-string.dec}"
   location = var.location
-  resource_group_name = azurerm_resource_group.az_resourcegroup.name
+  resource_group_name = "${azurerm_resource_group.az_resourcegroup.name}-${random_id.random-string.dec}"
 
   ip_configuration {
     name = "ipconfig1"
@@ -20,9 +20,9 @@ resource "azurerm_network_interface" "controller_vm1nic" {
 }
 
 resource "azurerm_virtual_machine" "example" {
-  name                  = "controller"
+  name                  = "controller-${random_id.random-string.dec}"
   location              = var.location
-  resource_group_name   = azurerm_resource_group.az_resourcegroup.name
+  resource_group_name   = "${azurerm_resource_group.az_resourcegroup.name}-${random_id.random-string.dec}"
   network_interface_ids = [azurerm_network_interface.controller_vm1nic.id]
   vm_size               = "Standard_B8ms"
 
@@ -66,8 +66,4 @@ resource "azurerm_virtual_machine" "example" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-
-
-
-
 }
