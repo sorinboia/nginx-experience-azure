@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = "${var.cluster_name}-${random_id.random-string.dec}"
   location            = var.location
-  resource_group_name = "${azurerm_resource_group.az_resourcegroup.name}-${random_id.random-string.dec}"
+  resource_group_name = azurerm_resource_group.az_resourcegroup.name
   dns_prefix          = "${var.dns_prefix}-${random_id.random-string.dec}"
 
   network_profile {
