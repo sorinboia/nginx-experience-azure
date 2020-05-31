@@ -14,7 +14,7 @@ For simplicity - we have already prepared the installation in a single yaml file
 
 <pre>
 Command:
-kubectl apply -f files/5ingress/nginx-ingress-install.yaml
+cat files/5ingress/nginx-ingress-install.yaml | sed "s/{{randomnumber}}/$randomnumber/g" | kubectl apply -f -
 
 Output:
 namespace/nginx-ingress created
@@ -35,6 +35,8 @@ kind: Service
 metadata:
   name: dashboard-nginx-ingress
   namespace: nginx-ingress
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: dashboard-$randomnumber
 spec:
   externalTrafficPolicy: Local
   type: LoadBalancer

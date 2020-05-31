@@ -19,8 +19,8 @@ By the end of the workshop the "Arcadia Financial" will be fully deployed and pr
 
 15. Clone the Workshop Repo:
 ```
-git clone https://github.com/sorinboia/nginx-experience-aws
-cd nginx-experience-aws/
+git clone https://github.com/sorinboia/nginx-experience-azure
+cd nginx-experience-azure/
 ```
 
 &nbsp;&nbsp;

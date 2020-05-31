@@ -41,12 +41,12 @@ Command:
 kubectl get svc -owide
 
 Output:
-NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                                                                 PORT(S)        AGE    SELECTOR  
-arcadia-app2   ClusterIP      172.20.215.142    none                                                                       80/TCP         23m    app=arcadia-app2  
-arcadia-app3   ClusterIP      172.20.97.115     none                                                                       80/TCP         23m    app=arcadia-app3  
-arcadia-main   ClusterIP      172.20.102.115    none                                                                       80:32065/TCP   23m    app=arcadia-main  
-backend        ClusterIP      172.20.84.9       none                                                                       80/TCP         5s     app=arcadia-backend  
-kubernetes     ClusterIP      172.20.0.1        none                                                                       443/TCP        108m    none   
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+arcadia-app2   ClusterIP   10.0.240.156   none          80/TCP    23s   app=arcadia-app2
+arcadia-app3   ClusterIP   10.0.62.5      none          80/TCP    23s   app=arcadia-app3
+arcadia-main   ClusterIP   10.0.63.54     none          80/TCP    24s   app=arcadia-main
+backend        ClusterIP   10.0.123.222   none          80/TCP    23s   app=arcadia-backend
+kubernetes     ClusterIP   10.0.0.1       none          443/TCP   42m   none 
 </pre>
 
 **The application is not accessible yet. We will deploy the NGINX Ingress in the next section.**  
