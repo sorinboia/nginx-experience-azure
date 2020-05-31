@@ -11,11 +11,11 @@ We will acomplish this using two components:
 <pre>
 Command:
 cd terraform
-terraform state show "aws_instance.controller" | grep "public_ip"
+terraform refresh
+terraform output controller_ip
 
 Output:
-    associate_public_ip_address  = true
-    public_ip                    = "18.184.134.91"
+52.151.70.150    
 </pre>
 
 2. Change the directory back to the original repo folder:
@@ -147,8 +147,8 @@ Click "Submit".
 > Name: server-cert   
 > Environment: prod  
 > Chose "Copy and paste PEM text"  
-> Private Key: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-aws/master/certs_for_mtls/ca.key copy and paste.  
-> Public Cert: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-aws/master/certs_for_mtls/ca.pem copy and paste.  
+> Private Key: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-azure/master/certs_for_mtls/ca.key copy and paste.  
+> Public Cert: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-azure/master/certs_for_mtls/ca.pem copy and paste.  
 > Submit
 
 10. Create the Gateway:  
