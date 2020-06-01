@@ -47,7 +47,7 @@ spec:
       name: http
   selector:
     app: nginx-ingress
-EOF    
+EOF
 </pre>
 
 3. Check what we did so far is actually working:
