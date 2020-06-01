@@ -150,7 +150,7 @@ Click "Submit".
 > Name: api.arcadia.azure.cloud  
 > Environment: prod  
 > Instance Refs: Select All  
-> Hostname: https://micro-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com  
+> Hostname: https://micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com  
 > Cert Reference: server-cert  
 > Submit
 
