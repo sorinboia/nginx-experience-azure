@@ -15,9 +15,12 @@ By the end of the workshop the "Arcadia Financial" will be fully deployed and pr
 
 ![](images/2env.jpg)
 
+1. Browse to https://portal.azure.com and login with the provided credentials
 
+2. Open the "Cloud Shell" console.
+![](images/1setup.JPG)
 
-15. Clone the Workshop Repo:
+3. Clone the Workshop Repo:
 ```
 git clone https://github.com/sorinboia/nginx-experience-azure
 cd nginx-experience-azure/

@@ -28,8 +28,7 @@ While you wait, you can review the [Core concepts for Azure Kubernetes Service](
 Wait for Terraform is to finish and verify the deployment is working as expected and we are able to control the Kubernetes environment.
 
 4. We need to save the remote access config for the Kubernetes cluster locally:  
-<pre>
-mkdir ~/.kube/ 
+<pre> 
 terraform output kube_config > ~/.kube/config
 </pre>
 

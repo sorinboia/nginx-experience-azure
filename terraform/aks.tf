@@ -23,9 +23,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     vm_size         = "Standard_D3_v2"
   }
 
-  service_principal {
-    client_id     = var.client_id
-    client_secret = var.client_secret
+  #service_principal {
+  #  client_id     = var.client_id
+  #  client_secret = var.client_secret
+  #}
+
+  identity {
+    type = "SystemAssigned"
   }
 
 
