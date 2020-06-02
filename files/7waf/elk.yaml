@@ -28,7 +28,7 @@ spec:
       initContainers:
         - name: increase-vm-max-map
           image: busybox
-          command: ["sysctl", "-w", "vm.max_map_count=262144"]
+          command: ["sysctl", "-w", "vm.max_map_count=524288"]
           securityContext:
             privileged: true
 
