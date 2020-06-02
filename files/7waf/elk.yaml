@@ -39,6 +39,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: elk-web
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: elk-{{randomnumber}}
 spec:
   type: LoadBalancer
   ports:

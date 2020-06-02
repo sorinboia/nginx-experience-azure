@@ -1,6 +1,6 @@
 ## Deploy NGINX infrastructure using Terraform
 
-We will start by using Terraform to deploy the initial infrastructure which includes the Amazon Elastic Kubernetes Service and the EC2 instance for the Nginx Controller.
+We will start by using Terraform to deploy the initial infrastructure which includes the Azure Kubernetes Service and the Virtual Machine instance for the Nginx Controller.
 
 1. Go to the "terraform" directory where we can find the terraform plan.
 
@@ -8,7 +8,7 @@ We will start by using Terraform to deploy the initial infrastructure which incl
 cd terraform
 </pre>
 
-2. Run the following commands, terraform plan will show us what it is going to be deployed in AWS by Terraform:
+2. Run the following commands, terraform plan will show us what it is going to be deployed in Azure by Terraform:
 <pre>
 terraform init
 terraform plan
@@ -28,8 +28,7 @@ While you wait, you can review the [Core concepts for Azure Kubernetes Service](
 Wait for Terraform is to finish and verify the deployment is working as expected and we are able to control the Kubernetes environment.
 
 4. We need to save the remote access config for the Kubernetes cluster locally:  
-<pre>
-mkdir ~/.kube/ 
+<pre> 
 terraform output kube_config > ~/.kube/config
 </pre>
 
@@ -53,14 +52,20 @@ kubectl get pods -n kube-system
 
 Output:
 NAME                                  READY   STATUS    RESTARTS   AGE
-coredns-698c77c5d7-kprwb              1/1     Running   0          5m5s
-coredns-698c77c5d7-pwfdn              1/1     Running   0          8m17s
-coredns-autoscaler-5bd7c6759b-msb6f   1/1     Running   0          8m14s
-kube-proxy-72ws2                      1/1     Running   0          5m19s
-kube-proxy-rpxxg                      1/1     Running   0          5m28s
-kube-proxy-srl45                      1/1     Running   0          5m14s
-metrics-server-7d654ddc8b-t889n       1/1     Running   0          8m17s
-tunnelfront-698dbdbb5-k5rfx           1/1     Running   0          8m16s  
+azure-cni-networkmonitor-f6xzb        1/1     Running   0          37m
+azure-cni-networkmonitor-hlt4v        1/1     Running   0          37m
+azure-cni-networkmonitor-p62gc        1/1     Running   0          37m
+azure-ip-masq-agent-bcmhg             1/1     Running   0          37m
+azure-ip-masq-agent-jvhj4             1/1     Running   0          37m
+azure-ip-masq-agent-r4s6h             1/1     Running   0          37m
+coredns-698c77c5d7-mknzh              1/1     Running   0          37m
+coredns-698c77c5d7-xlx8g              1/1     Running   0          40m
+coredns-autoscaler-5ccb7f6c8f-8kjtb   1/1     Running   0          40m
+kube-proxy-68nkm                      1/1     Running   0          37m
+kube-proxy-7mxf2                      1/1     Running   0          37m
+kube-proxy-7z584                      1/1     Running   0          37m
+metrics-server-7d654ddc8b-lp2q2       1/1     Running   0          40m
+tunnelfront-568d897589-kkw5t          1/1     Running   0          40m
 </pre>
 
 At the moment we have our setup deployed as it can be seen in the bellow diagram.
@@ -71,6 +76,18 @@ At the moment we have our setup deployed as it can be seen in the bellow diagram
 ```
 cd ..
 ```
+
+7. Generate a random number which will be used later in our deployments
+> export randomnumber=$(openssl rand -hex 4)
+
+8. Check the random number which has been created and save it for later
+<pre>
+Command:
+echo $randomnumber
+Output:
+adf10a30
+</pre>
+
 
 Next we will move on to deploying the application.
 

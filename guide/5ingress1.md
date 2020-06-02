@@ -40,7 +40,7 @@ Enabling MTLS on our Nginx Ingress Controller is quite simple, we are going to a
 > ssl_verify_client on;
 
 This will enable MTLS while using the pre uploaded ca.pem certificate.
-
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 Update Ingress by applying the new configuration, which should now look like this:
 <pre>
 apiVersion: extensions/v1beta1
@@ -64,10 +64,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+    - arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+  - host: arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /
@@ -84,18 +84,18 @@ spec:
           servicePort: 80
 </pre>
   
-:warning: Please note: you need to replace the `host` value with the EXTERNAL-IP of the `nginx-ingress` service.
+
 
 2. Browse to the Arcadia site again, and you'll see that you can't access it since you don't have the client certificate.  
   
   
-3. Verify this is actually working by running the bellow command, it will use the client cert/key pair on the Cloud9 instance to authenticate:
+3. Verify this is actually working by running the bellow command, it will use the client cert/key pair on the Azure console instance to authenticate:
 
 ```
 curl -v -k \
     --key certs_for_mtls/01-alice.key \
     --cert certs_for_mtls/01-alice.pem \
-    https://<INGRESS-EXTERNAL-IP>/ \
+    https://arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com/ \
     | grep 'Welcome'
 ```
 

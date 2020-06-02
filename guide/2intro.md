@@ -15,12 +15,32 @@ By the end of the workshop the "Arcadia Financial" will be fully deployed and pr
 
 ![](images/2env.jpg)
 
+## Azure console and general instructions
+
+During the workshop we will use the Azure "Cloud Shell" console. All the tools required to run the lab are included.  
+Azure Cloud Shell is an interactive, authenticated, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work, either Bash or PowerShell. 
+Cloud Shell enables access to a browser-based command-line experience built with Azure management tasks in mind. Leverage Cloud Shell to work untethered from a local machine in a way only the cloud can provide.  
 
 
-15. Clone the Workshop Repo:
+1. Browse to https://portal.azure.com and login with the provided credentials
+
+2. Open the "Cloud Shell" console.
+![](images/1setup.JPG)
+
+3. Click "Open editor" in order to see all the files in the system and interact with them
+
+![](images/2setup.JPG)
+
+4. When required to create a new file use the following command in the shell, after creating the file refresh the editor view in order to see it and edit it.
+> touch path/filename
+
+![](images/3setup.JPG)
+
+
+5. Clone the Workshop Repo:
 ```
-git clone https://github.com/sorinboia/nginx-experience-aws
-cd nginx-experience-aws/
+git clone https://github.com/sorinboia/nginx-experience-azure
+cd nginx-experience-azure/
 ```
 
 &nbsp;&nbsp;

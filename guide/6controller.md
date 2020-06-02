@@ -11,11 +11,11 @@ We will acomplish this using two components:
 <pre>
 Command:
 cd terraform
-terraform state show "aws_instance.controller" | grep "public_ip"
+terraform refresh
+terraform output controller_ip
 
 Output:
-    associate_public_ip_address  = true
-    public_ip                    = "18.184.134.91"
+52.151.70.150    
 </pre>
 
 2. Change the directory back to the original repo folder:
@@ -39,6 +39,7 @@ Once you login - the first thing you will see is the API key, save it for later.
 5. Deploy the microgateway with the following configuration.  
 
 :warning: Please note: you need to replace the IP address of the controller and the API key value you saved in the previous step.
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 Create a new file `microgw.yaml`:
 
 <pre>
@@ -84,6 +85,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: microgateway
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: micro-[RANDOM GENERATED NUMBER]    
 spec:
   selector:
     app: microgateway
@@ -105,17 +108,7 @@ The end goal will be to expose and protect our APIs both internally within the c
 
 You will see the microgateway we just deployed listed. If it is not there wait for about 2 minutes, it might take a little bit of time for the instance to register.
 
-7. Get the EXTERNAL-IP of the microgateway service we just published, we will use it later within our config.  
-
-<pre>
-Command:
-kubectl get svc microgateway
-
-Output:
-NAME           TYPE           CLUSTER-IP     EXTERNAL-IP                                                                 PORT(S)                      AGE
-microgateway   LoadBalancer   172.20.181.0   ae0aa9bf7704745fbb2a47da2c3a2039-258004477.eu-central-1.elb.amazonaws.com   80:31424/TCP,443:32040/TCP   21h
-</pre>
-
+7. The hostname of the microgateway service we just published, will have the following format `micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com` .  
 
 8. Build the configuration:
 ##### "N" -> "Services" -> "Environments" -> "Create Environment"  
@@ -147,17 +140,17 @@ Click "Submit".
 > Name: server-cert   
 > Environment: prod  
 > Chose "Copy and paste PEM text"  
-> Private Key: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-aws/master/certs_for_mtls/ca.key copy and paste.  
-> Public Cert: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-aws/master/certs_for_mtls/ca.pem copy and paste.  
+> Private Key: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-azure/master/certs_for_mtls/ca.key copy and paste.  
+> Public Cert: Browse to https://raw.githubusercontent.com/sorinboia/nginx-experience-azure/master/certs_for_mtls/ca.pem copy and paste.  
 > Submit
 
 10. Create the Gateway:  
 
 ##### "N" -> "Services" -> "Gateways" -> "Create Gateway"
-> Name: api.arcadia.aws.cloud  
+> Name: api.arcadia.azure.cloud  
 > Environment: prod  
 > Instance Refs: Select All  
-> Hostname: https://<EXTERNAL-IP OF THE "microgateway" SERVICE>  
+> Hostname: https://micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com  
 > Cert Reference: server-cert  
 > Submit
 
@@ -204,14 +197,14 @@ Click the "Pen" icon of the "Arcadia API" and you can see a list of the defined 
  kubectl get svc
  
  Output:
- NAME              TYPE           CLUSTER-IP       EXTERNAL-IP                                                                 PORT(S)                      AGE
- arcadia-app2      ClusterIP      172.20.103.189   none                                                                        80/TCP                       171m
- arcadia-app3      ClusterIP      172.20.238.13    none                                                                        80/TCP                       171m
- arcadia-backend   ClusterIP      172.20.228.83    none                                                                        80/TCP                       109m
- arcadia-main      ClusterIP      172.20.166.2     none                                                                        80/TCP                       7s
- backend           ClusterIP      172.20.44.133    none                                                                        80/TCP                       171m
- kubernetes        ClusterIP      172.20.0.1       none                                                                        443/TCP                      8h
- microgateway      LoadBalancer   172.20.81.110    a2fa7314165114fb9b16ebd92a890078-367878391.eu-central-1.elb.amazonaws.com   80:32293/TCP,443:32428/TCP   12m
+ NAME              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                      AGE
+ arcadia-app2      ClusterIP      10.0.240.156   none          80/TCP                       3h26m
+ arcadia-app3      ClusterIP      10.0.62.5      none          80/TCP                       3h26m
+ arcadia-backend   ClusterIP      10.0.9.117     none          80/TCP                       65m
+ arcadia-main      ClusterIP      10.0.63.54     none          80/TCP                       3h26m
+ backend           ClusterIP      10.0.123.222   none          80/TCP                       3h26m
+ kubernetes        ClusterIP      10.0.0.1       none          443/TCP                      4h8m
+ microgateway      LoadBalancer   10.0.240.6     51.11.15.56   80:32742/TCP,443:32397/TCP   8m
  </pre>
 
 We are interested in "main" and "app2" and their DNS names are `arcadia-main` and `arcadia-app2`.
@@ -236,7 +229,7 @@ Return to "N" -> "Services"-> "APIs" -> "API Definitions" -> "Arcadia API" -> "P
 > Published API Name: arcadia-pub-api  
 > Environment: prod  
 > Application: arcadia-api  
-> Gateways: api.arcadia.aws.cloud  
+> Gateways: api.arcadia.azure.cloud  
 
 Save  
 
@@ -303,12 +296,12 @@ EOF
 
 
 23. Generate an API call to our published APIs.  
-:warning: Please note: you need to replace the IP address of the `microgateway` service.
+:warning: Please note: you need to replace the `RANDOM GENERATED NUMBER` value with the specific value.
 
 Run the bellow curl command.
 <pre>
 Command:
-curl -k --location --request POST 'https://[EXTERNAL-IP OF THE "microgateway" service]/api/rest/execute_money_transfer.php' --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
+curl -k --location --request POST 'https://micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com/api/rest/execute_money_transfer.php' --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
 </pre>
 You should receive a success message and if you go to the main Arcadia application and refresh the page you will be able to see the transaction we just did in the "Transfer History" section.
 
@@ -347,7 +340,7 @@ In order to check that all is working as expected, we will do the following:
 26. Run the previous curl command. You should receive a 401 status code:
 
 <pre>
-curl -k --location --request POST 'https://[EXTERNAL-IP OF THE "microgateway" service]/api/rest/execute_money_transfer.php' --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
+curl -k --location --request POST 'https://micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com/api/rest/execute_money_transfer.php' --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
 </pre>
 
 27. Now we will run the same command but include the "apikey" header with the API key we previously generated and the transaction will succeed again.  
@@ -355,7 +348,7 @@ curl -k --location --request POST 'https://[EXTERNAL-IP OF THE "microgateway" se
 
 <pre>
 export apikey=[REPLACE WITH THE PREVIOUSLY SAVED API KEY]
-curl -k --location --request POST 'https://[EXTERNAL-IP OF THE "microgateway" service]/api/rest/execute_money_transfer.php' --header "apikey: $apikey" --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
+curl -k --location --request POST 'https://micro-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com/api/rest/execute_money_transfer.php' --header "apikey: $apikey" --header 'Content-Type: application/json' --data-raw '{"amount":"77","account":"2075894","currency":"EUR","friend":"Alfredo"}'
 </pre>
 
 

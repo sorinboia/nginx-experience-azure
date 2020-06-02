@@ -1071,7 +1071,7 @@ metadata:
   name: nginx-ingress
   namespace: nginx-ingress
   annotations:
-    service.beta.kubernetes.io/azure-dns-label-name: sorin
+    service.beta.kubernetes.io/azure-dns-label-name: arcadia-{{randomnumber}}
 spec:
   externalTrafficPolicy: Local
   type: LoadBalancer
