@@ -30,7 +30,7 @@ spec:
             - mountPath: /etc/nginx/waf # mount nginx-conf volumn to /etc/nginx
               readOnly: true
               name: nginx-waf
-            - mountPath: /etc/nginx/conf.d # mount nginx-conf volumn to /etc/nginx
+            - mountPath: /etc/nginx # mount nginx-conf volumn to /etc/nginx
               readOnly: true
               name: nginxwaf-config
           securityContext:
