@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: nginxwaf-config
 data:
-  nginx.conf: |
+  protect.conf: |
     http {
         include       /etc/nginx/mime.types;
         default_type  application/octet-stream;
