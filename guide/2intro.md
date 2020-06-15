@@ -21,23 +21,28 @@ During the workshop we will use the Azure "Cloud Shell" console. All the tools r
 Azure Cloud Shell is an interactive, authenticated, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work, either Bash or PowerShell. 
 Cloud Shell enables access to a browser-based command-line experience built with Azure management tasks in mind. Leverage Cloud Shell to work untethered from a local machine in a way only the cloud can provide.  
 
+1. Browse to https://www.microsoftazurepass.com/ and click "Start" and login with your Microsoft account
 
-1. Browse to https://portal.azure.com and login with the provided credentials
+2. Enter the provided promo code and wait for the page to be redirected to the signup page
+![](images/4setup.JPG)
 
-2. Open the "Cloud Shell" console.
+3. Click the first and second options checkboxes and wait for the signup process toi finish.
+![](images/5setup.JPG)
+
+4. Open the "Cloud Shell" console.
 ![](images/1setup.JPG)
 
-3. Click "Open editor" in order to see all the files in the system and interact with them
+5. Click "Open editor" in order to see all the files in the system and interact with them
 
 ![](images/2setup.JPG)
 
-4. When required to create a new file use the following command in the shell, after creating the file refresh the editor view in order to see it and edit it.
+6. When required to create a new file use the following command in the shell, after creating the file refresh the editor view in order to see it and edit it.
 > touch path/filename
 
 ![](images/3setup.JPG)
 
 
-5. Clone the Workshop Repo:
+7. Clone the Workshop Repo:
 ```
 git clone https://github.com/sorinboia/nginx-experience-azure
 cd nginx-experience-azure/
