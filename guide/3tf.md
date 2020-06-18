@@ -29,6 +29,7 @@ Wait for Terraform is to finish and verify the deployment is working as expected
 
 4. We need to save the remote access config for the Kubernetes cluster locally:  
 <pre> 
+mkdir ~/.kube/
 terraform output kube_config > ~/.kube/config
 </pre>
 

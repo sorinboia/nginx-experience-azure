@@ -2,7 +2,7 @@
 #variable "client_secret" {}
 
 variable "agent_count" {
-  default = 3
+  default = 2
 }
 
 variable "ssh_public_key" {
@@ -23,6 +23,10 @@ variable resource_group_name {
 
 variable location {
   default = "UK South"
+}
+
+variable controller_location {
+  default = "UK West"
 }
 
 resource "random_id" "random-string" {

@@ -1,6 +1,6 @@
 resource "azurerm_public_ip" "controller_pip" {
   name = "controller_pip"
-  location = var.location
+  location = var.controller_location
   resource_group_name = azurerm_resource_group.az_resourcegroup.name
   allocation_method = "Dynamic"
   sku = "Basic"
@@ -8,7 +8,7 @@ resource "azurerm_public_ip" "controller_pip" {
 
 resource "azurerm_network_interface" "controller_vm1nic" {
   name = "controller-vm1-nic-${random_id.random-string.dec}"
-  location = var.location
+  location = var.controller_location
   resource_group_name = azurerm_resource_group.az_resourcegroup.name
   ip_configuration {
     name = "ipconfig1"
@@ -20,7 +20,7 @@ resource "azurerm_network_interface" "controller_vm1nic" {
 
 resource "azurerm_virtual_machine" "example" {
   name                  = "controller-${random_id.random-string.dec}"
-  location              = var.location
+  location              = var.controller_location
   resource_group_name   = azurerm_resource_group.az_resourcegroup.name
   network_interface_ids = [azurerm_network_interface.controller_vm1nic.id]
   vm_size               = "Standard_B8ms"

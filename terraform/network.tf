@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network" "public_vnet" {
   name = "public-vnet-${random_id.random-string.dec}"
   address_space = ["10.0.0.0/16"]
-  location = var.location
+  location = var.controller_location
   resource_group_name = azurerm_resource_group.az_resourcegroup.name
 }
 
