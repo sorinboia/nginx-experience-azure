@@ -26,7 +26,7 @@ variable location {
 }
 
 variable controller_location {
-  default = "UK West"
+  default = "West Europe"
 }
 
 resource "random_id" "random-string" {
