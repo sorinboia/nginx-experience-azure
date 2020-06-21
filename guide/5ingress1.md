@@ -125,10 +125,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+    - arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     secretName: arcadia-tls
   rules:
-  - host: MUST BE REPLACED WITH "EXTERNAL-IP" OF THE "nginx-ingress" SERVICE
+  - host: arcadia-[RANDOM GENERATED NUMBER].uksouth.cloudapp.azure.com
     http:
       paths:
       - path: /

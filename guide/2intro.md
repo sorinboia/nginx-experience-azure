@@ -1,6 +1,6 @@
 ## Intro to the workshop
 
-This workshop will provide guidelines on how to deploy an application from scratch in Amazon Elastic Kubernetes Service environment while protecting and enhancing the application availability and usability with Nginx solutions.
+This workshop will provide guidelines on how to deploy an application from scratch in Azure Kubernetes Service environment while protecting and enhancing the application availability and usability with Nginx solutions.
 
 For this workshop we are going to use the "Arcadia Financial" application.
 The application is built with 4 different microservices that are deployed in the Kubernetes environment.
