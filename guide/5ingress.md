@@ -120,7 +120,7 @@ kubectl apply -f files/5ingress/arcadia-vs.yaml
 
 At this stage the basic install is finished and all that's left is to check the connectivity to the Arcadia web application. Get the public hostname of the exposed `nginx-ingress` service.  
 
-6. Browse to the following location and verify that you can access the site: `https://arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com/`  
+6. Browse to the following location and verify that you can access the site: `http://arcadia-<RANDOM GENERATED NUMBER>.uksouth.cloudapp.azure.com/`  
 
 7. Login to the application using the following credentials:
 
