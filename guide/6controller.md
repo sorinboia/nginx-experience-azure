@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
         - name: microgateway1
-          image: sorinboia/ngtest:3.4
+          image: sorinboia/ngtest:3.6b
           imagePullPolicy: Always
           env:
             - name: API_KEY
